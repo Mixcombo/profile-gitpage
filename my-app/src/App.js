@@ -1,5 +1,9 @@
 import React, { useState } from 'react';
 import './App.css';
+import Navbar from './component/Navbar';
+import Profile from './page/Profile';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './page/Home';
 
 function App() {
   const [darkMode, setDarkMode] = useState(true);
@@ -9,41 +13,28 @@ function App() {
   };
 
   const themeClass = darkMode ? 'dark' : 'light';
+  const themeClass2 = darkMode ? 'light' : 'dark';
 
   return (
-      <div className={`app ${themeClass}`}>
-        <div className="left-side">
-          <h1 className="name">Aingthawan K.</h1>
-          <div className="details">
-            {/* Add your details here */}
-            <p className="details-text">อิงธวัล</p>
+      <div>
+        <BrowserRouter>
+          <div className={`navbar ${themeClass2}`}>
+            <Navbar />
+            <div className="theme-switch" onClick={toggleTheme}>
+                {darkMode ? 'Light' : 'Dark'}
+            </div>
           </div>
-        </div>
- 
-        <div className="right-side">
-          <div className="cv-details">
-            {/* Add your CV details here */}
-            <h1 className="details-text-quotes"> " life is like a box of chocolates. You never know what you're gonna get. " </h1>
-            <h1 className='details-text-quotes'> - Forrest Gump </h1>
-            <h2>Profile
-            <p className="details-text-2">As a computer engineering student with a Voc. Cert. degree in pre-electrical engineering, I have a foundation in both hardware and software systems. My passion lies in Open Source Project, Robotics, Agritech ,and 3D-Printing Technology. I'm looking forward for a position to further improve my profession in these field.
-            </p>
-            </h2>
-            <h2>Education
-            <p className="details-text-2"> King Mongkut's University of Technology North Bangkok [KMUTNB] </p>
-            <li className="details-text-2">Vocational Certificate in Pre-Electrical Engineering</li>
-            <li className="details-text-2">Bachelor of Engineering in Computer Engineering</li>
-            </h2>
+
+          <div className={`${themeClass}`}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/profile" element={<Profile />} />
+            </Routes>
           </div>
-        </div>
-        <div className="theme-switch" onClick={toggleTheme}>
-          {darkMode ? 'Light' : 'Dark'}
-        </div>
+
+        </BrowserRouter>
       </div>
   );
 }
-
-
-
 
 export default App;
